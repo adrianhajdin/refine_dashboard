@@ -363,9 +363,9 @@ export default config;
 import gql from "graphql-tag";
 
 // Mutation to update user
-export const UPDATE_USER_MUTATION = gql`
+export const UPDATE_ADMIN_MUTATION = gql`
   # The ! after the type means that it is required
-  mutation UpdateUser($input: UpdateOneUserInput!) {
+  mutation UpdateUser($input: UpdateOneAdminInput!) {
     # call the updateOneUser mutation with the input and pass the $input argument
     # $variableName is a convention for GraphQL variables
     updateOneUser(input: $input) {
@@ -828,7 +828,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Button, Card, Drawer, Form, Input, Spin } from "antd";
 
 import { getNameInitials } from "@/utilities";
-import { UPDATE_USER_MUTATION } from "@/graphql/mutations";
+import { UPDATE_ADMIN_MUTATION } from "@/graphql/mutations";
 
 import { Text } from "../text";
 import CustomAvatar from "../custom-avatar";

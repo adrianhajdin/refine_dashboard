@@ -6,7 +6,7 @@ import { useNotificationProvider } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
 
 import { authProvider, dataProvider, liveProvider } from "./providers";
-import { Home, ForgotPassword, Login, Register, CompanyList } from "./pages";
+import { Home, ForgotPassword, Login, Register, CompanyList, UsersList } from "./pages";
 
 import routerBindings, {
   CatchAllNavigate,
@@ -19,6 +19,8 @@ import Layout from "./components/layout";
 import { resources } from "./config/resources";
 import Create from "./pages/company/create";
 import Edit from "./pages/company/edit";
+import CreateUser from "./pages/users/create";
+import EditUser from "./pages/users/edit";
 import List from "./pages/tasks/list";
 import EditTask from "./pages/tasks/edit";
 import CreateTask from "./pages/tasks/create";
@@ -62,8 +64,13 @@ function App() {
                       <Route index element={<Home />} />
                       <Route path="/companies" >
                         <Route index element={<CompanyList />} />
-                        <Route path="new" element={<Create />} />
+                        <Route path="new" element={<Create/>} />
                         <Route path="edit/:id" element={<Edit />} />
+                      </Route>
+                      <Route path="/users" >
+                        <Route index element={<UsersList />} />
+                        <Route path="new" element={<CreateUser />} />
+                        <Route path="edit/:id" element={<EditUser />} />
                       </Route>
                       <Route path="/tasks" element={
                         <List>

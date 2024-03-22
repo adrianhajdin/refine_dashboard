@@ -6,7 +6,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Button, Card, Drawer, Form, Input, Spin } from "antd";
 
 import { getNameInitials } from "@/utilities";
-import { UPDATE_USER_MUTATION } from "@/graphql/mutations";
+import { UPDATE_ADMIN_MUTATION } from "@/graphql/mutations";
 
 import { Text } from "../text";
 import CustomAvatar from "../custom-avatar";
@@ -73,7 +73,7 @@ export const AccountSettings = ({ opened, setOpened, userId }: Props) => {
      */
     meta: {
       // gqlMutation is used to specify the mutation that should be performed.
-      gqlMutation: UPDATE_USER_MUTATION,
+      gqlMutation: UPDATE_ADMIN_MUTATION,
     },
   });
   const { avatarUrl, name } = queryResult?.data?.data || {};

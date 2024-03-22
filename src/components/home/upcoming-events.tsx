@@ -74,3 +74,5 @@ const UpcomingEvents = () => {
 };
 
 export default UpcomingEvents;
+
+//The original class component has been converted into a functional component to adhere to modern React practices.

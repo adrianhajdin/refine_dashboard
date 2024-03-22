@@ -1,10 +1,10 @@
 import type * as Types from "./schema.types";
 
-export type UpdateUserMutationVariables = Types.Exact<{
-  input: Types.UpdateOneUserInput;
+export type UpdateAdminMutationVariables = Types.Exact<{
+  input: Types.UpdateOneAdminInput;
 }>;
 
-export type UpdateUserMutation = {
+export type UpdateAdminMutation = {
   updateOneUser: Pick<
     Types.User,
     "id" | "name" | "avatarUrl" | "email" | "phone" | "jobTitle"

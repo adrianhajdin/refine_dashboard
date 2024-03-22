@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 // Mutation to update user
-export const UPDATE_USER_MUTATION = gql`
+export const UPDATE_ADMIN_MUTATION = gql`
   # The ! after the type means that it is required
   mutation UpdateUser($input: UpdateOneUserInput!) {
     # call the updateOneUser mutation with the input and pass the $input argument

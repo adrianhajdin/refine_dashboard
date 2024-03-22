@@ -2962,7 +2962,7 @@ export type MutationUpdateOneTaskStageArgs = {
 };
 
 export type MutationUpdateOneUserArgs = {
-  input: UpdateOneUserInput;
+  input: UpdateOneAdminInput;
 };
 
 export type NumberFieldComparison = {
@@ -4631,7 +4631,7 @@ export type UpdateOneTaskSubscriptionFilterInput = {
   filter: TaskSubscriptionFilter;
 };
 
-export type UpdateOneUserInput = {
+export type UpdateOneAdminInput = {
   /** The id of the record to update */
   id: Scalars["ID"]["input"];
   /** The update to apply. */
