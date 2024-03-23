@@ -1369,6 +1369,7 @@ export type CreateOneCompanyInput = {
   company: CompanyCreateInput;
 };
 
+
 export type CreateOneCompanyNoteInput = {
   /** The record to create */
   companyNote: CompanyNoteCreateInput;
@@ -2962,7 +2963,7 @@ export type MutationUpdateOneTaskStageArgs = {
 };
 
 export type MutationUpdateOneUserArgs = {
-  input: UpdateOneUserInput;
+  input: UpdateOneAdminInput;
 };
 
 export type NumberFieldComparison = {
@@ -3399,7 +3400,9 @@ export type RegisterInput = {
 
 /** Role */
 export type Role = "ADMIN" | "SALES_INTERN" | "SALES_MANAGER" | "SALES_PERSON";
-
+export type RoleLabel = {
+  [key in Role]: string;
+};
 /** Sort Directions */
 export type SortDirection = "ASC" | "DESC";
 
@@ -4631,7 +4634,7 @@ export type UpdateOneTaskSubscriptionFilterInput = {
   filter: TaskSubscriptionFilter;
 };
 
-export type UpdateOneUserInput = {
+export type UpdateOneAdminInput = {
   /** The id of the record to update */
   id: Scalars["ID"]["input"];
   /** The update to apply. */
@@ -4740,7 +4743,6 @@ export type UserCreateInput = {
   name: Scalars["String"]["input"];
   phone: Scalars["String"]["input"];
   role: Role;
-  timezone: Scalars["String"]["input"];
 };
 
 export type UserDealsConnection = {

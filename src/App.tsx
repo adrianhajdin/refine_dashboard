@@ -6,7 +6,7 @@ import { useNotificationProvider } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
 
 import { authProvider, dataProvider, liveProvider } from "./providers";
-import { Home, ForgotPassword, Login, Register, CompanyList } from "./pages";
+import { Home, ForgotPassword, Login, Register, CompanyList, UsersList } from "./pages";
 
 import routerBindings, {
   CatchAllNavigate,
@@ -19,16 +19,20 @@ import Layout from "./components/layout";
 import { resources } from "./config/resources";
 import Create from "./pages/company/create";
 import Edit from "./pages/company/edit";
+import CreateUser from "./pages/users/create";
+import EditUser from "./pages/users/edit";
 import List from "./pages/tasks/list";
 import EditTask from "./pages/tasks/edit";
 import CreateTask from "./pages/tasks/create";
-
+import CurrentUser from "./components/layout/current-user";
+import {CurrentUserProvider} from './CurrentUserProvider'
 function App() {
   return (
     <BrowserRouter>
       <RefineKbarProvider>
           <AntdApp>
             <DevtoolsProvider>
+            <CurrentUserProvider>
               <Refine
                 dataProvider={dataProvider}
                 liveProvider={liveProvider}
@@ -62,8 +66,13 @@ function App() {
                       <Route index element={<Home />} />
                       <Route path="/companies" >
                         <Route index element={<CompanyList />} />
-                        <Route path="new" element={<Create />} />
+                        <Route path="new" element={<Create/>} />
                         <Route path="edit/:id" element={<Edit />} />
+                      </Route>
+                      <Route path="/users" >
+                        <Route index element={<UsersList  />} />
+                        <Route path="new" element={<CreateUser />} />
+                        <Route path="edit/:id" element={<EditUser />} />
                       </Route>
                       <Route path="/tasks" element={
                         <List>
@@ -79,6 +88,7 @@ function App() {
                 <UnsavedChangesNotifier />
                 <DocumentTitleHandler />
               </Refine>
+              </CurrentUserProvider>
               <DevtoolsPanel />
             </DevtoolsProvider>
           </AntdApp>

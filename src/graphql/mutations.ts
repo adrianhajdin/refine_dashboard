@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 // Mutation to update user
-export const UPDATE_USER_MUTATION = gql`
+export const UPDATE_ADMIN_MUTATION = gql`
   # The ! after the type means that it is required
   mutation UpdateUser($input: UpdateOneUserInput!) {
     # call the updateOneUser mutation with the input and pass the $input argument
@@ -16,6 +16,36 @@ export const UPDATE_USER_MUTATION = gql`
     }
   }
 `;
+
+// Mutation to create user
+export const CREATE_USERS_MUTATION = gql`
+  mutation CreateUsers($input: CreateOneUserInput!) {
+    createOneUser(input: $input) {
+      id
+      name
+      avatarUrl
+      email
+      phone
+      jobTitle
+    }
+  }
+`;
+
+
+// Mutation to update user details
+export const UPDATE_USERS_MUTATION = gql`
+  mutation UpdateUsers($input: UpdateOneUserInput!) {
+    updateOneUser(input: $input) {
+      id
+      name
+      avatarUrl
+      email
+      phone
+      jobTitle
+    }
+  }
+`;
+
 
 // Mutation to create company
 export const CREATE_COMPANY_MUTATION = gql`
