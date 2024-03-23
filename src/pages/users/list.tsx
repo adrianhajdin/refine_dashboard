@@ -17,12 +17,8 @@ const roleLabels: { [key: string]: string } = {
   SALES_PERSON: "Sales Person"
 };
 
-interface UsersListProps {
-  currentUser: User | null;
-  children?: React.ReactNode;
-}
 
-export const UsersList: React.FC<UsersListProps> = ({ children }) => {
+export const UsersList = ({ children }: React.PropsWithChildren) => {
   const { data: identityData } = useGetIdentity<User>();
 
   const go = useGo();
@@ -120,25 +116,25 @@ export const UsersList: React.FC<UsersListProps> = ({ children }) => {
             )}
           />
          <Table.Column<User>
-  dataIndex="jobTitle"  // Assuming the field name for job title is 'jobTitle'
-  title="Job Title"     // Set the title of the column
-  render={(value) => (
-    <Text>{value}</Text> // Render the job title value
-  )}
-/>
-            <Table.Column<User>
-          dataIndex="id"
-          title="Actions"
-          fixed="right"
-          render={(value, record) => (
-            <Space>
-             {!((roleLabels[record.role] === 'Admin') || (identityData?.id === record.id)) ? (
-              <>
-                <EditButton hideText size="small" recordItemId={value} />
-                <DeleteButton hideText size="small" recordItemId={value} />
-              </>
-            ) : null}
-          </Space>
+            dataIndex="jobTitle"  // Assuming the field name for job title is 'jobTitle'
+            title="Job Title"     // Set the title of the column
+            render={(value) => (
+              <Text>{value}</Text> // Render the job title value
+            )}
+          />
+          <Table.Column<User>
+            dataIndex="id"
+            title="Actions"
+            fixed="right"
+            render={(value, record) => (
+              <Space>
+              {!((roleLabels[record.role] === 'Admin') || (identityData?.id === record.id)) ? (
+                <>
+                  <EditButton hideText size="small" recordItemId={value} />
+                  <DeleteButton hideText size="small" recordItemId={value} />
+                </>
+              ) : null}
+              </Space>
           )}
         />
         </Table>

@@ -24,13 +24,15 @@ import EditUser from "./pages/users/edit";
 import List from "./pages/tasks/list";
 import EditTask from "./pages/tasks/edit";
 import CreateTask from "./pages/tasks/create";
-
+import CurrentUser from "./components/layout/current-user";
+import {CurrentUserProvider} from './CurrentUserProvider'
 function App() {
   return (
     <BrowserRouter>
       <RefineKbarProvider>
           <AntdApp>
             <DevtoolsProvider>
+            <CurrentUserProvider>
               <Refine
                 dataProvider={dataProvider}
                 liveProvider={liveProvider}
@@ -68,7 +70,7 @@ function App() {
                         <Route path="edit/:id" element={<Edit />} />
                       </Route>
                       <Route path="/users" >
-                        <Route index element={<UsersList />} />
+                        <Route index element={<UsersList  />} />
                         <Route path="new" element={<CreateUser />} />
                         <Route path="edit/:id" element={<EditUser />} />
                       </Route>
@@ -86,6 +88,7 @@ function App() {
                 <UnsavedChangesNotifier />
                 <DocumentTitleHandler />
               </Refine>
+              </CurrentUserProvider>
               <DevtoolsPanel />
             </DevtoolsProvider>
           </AntdApp>
