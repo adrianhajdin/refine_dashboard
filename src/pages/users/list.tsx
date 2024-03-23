@@ -8,8 +8,23 @@ import { CreateButton, DeleteButton, EditButton, FilterDropdown, List, useTable 
 import { HttpError, getDefaultFilter, useGo } from '@refinedev/core'
 import { GetFieldsFromList } from '@refinedev/nestjs-query';
 import { Input, Space, Table } from 'antd';
+import { useGetIdentity } from '@refinedev/core';
 
-export const UsersList = ({ children }: React.PropsWithChildren) => {
+const roleLabels: { [key: string]: string } = {
+  ADMIN: "Admin",
+  SALES_INTERN: "Sales Intern",
+  SALES_MANAGER: "Sales Manager",
+  SALES_PERSON: "Sales Person"
+};
+
+interface UsersListProps {
+  currentUser: User | null;
+  children?: React.ReactNode;
+}
+
+export const UsersList: React.FC<UsersListProps> = ({ children }) => {
+  const { data: identityData } = useGetIdentity<User>();
+
   const go = useGo();
   const { tableProps, filters } = useTable<
     GetFieldsFromList<UsersListQuery>,
@@ -52,65 +67,83 @@ export const UsersList = ({ children }: React.PropsWithChildren) => {
   })
 
   return (
-  <div>
-    <List
-      breadcrumb={false}
-      headerButtons={() => (
-        <CreateButton 
-          onClick={() => {
-            go({
-              to: {
-                resource: 'users',
-                action: 'create'
-              },
-              options: {
-                keepQuery: true
-              },
-              type: 'replace'
-            })
-          }}
-        />
-      )}
-    >
-      <Table
-        {...tableProps}
-        pagination={{
-          ...tableProps.pagination,
-        }}
+    <div>
+      <List
+        breadcrumb={false}
+        headerButtons={() => (
+          <CreateButton 
+            onClick={() => {
+              go({
+                to: {
+                  resource: 'users',
+                  action: 'create'
+                },
+                options: {
+                  keepQuery: true
+                },
+                type: 'replace'
+              })
+            }}
+          />
+        )}
       >
-        <Table.Column<User>
-          dataIndex="name"
-          title="User Name"
-          defaultFilteredValue={getDefaultFilter('id', filters)}
-          filterIcon={<SearchOutlined />}
-          filterDropdown={(props) => (
-            <FilterDropdown {...props}>
-              <Input placeholder="Search User" />
-            </FilterDropdown>
-          )}
-          render={(value, record) => (
-            <Space>
-              <CustomAvatar shape="square" name={record.name} src={record.avatarUrl} />
-              <Text style={{ whiteSpace: 'nowrap' }}>
-              {record.name}
-              </Text>
-            </Space>
-          )}
-        />
-        <Table.Column<User>
+        <Table
+          {...tableProps}
+          pagination={{
+            ...tableProps.pagination,
+          }}
+        >
+          <Table.Column<User>
+            dataIndex="name"
+            title="User Name"
+            defaultFilteredValue={getDefaultFilter('id', filters)}
+            filterIcon={<SearchOutlined />}
+            filterDropdown={(props) => (
+              <FilterDropdown {...props}>
+                <Input placeholder="Search User" />
+              </FilterDropdown>
+            )}
+            render={(value, record) => (
+              <Space>
+                <CustomAvatar shape="square" name={record.name} src={record.avatarUrl} />
+                <Text style={{ whiteSpace: 'nowrap' }}>
+                  {record.name}
+                </Text>
+              </Space>
+            )}
+          />
+          <Table.Column<User>
+            dataIndex="role" // Assuming the field name for user role is 'role'
+            title="User Role"
+            render={(value) => (
+              <Text>{roleLabels[value]}</Text>  // Use the roleLabels object to map the role to its label
+            )}
+          />
+         <Table.Column<User>
+  dataIndex="jobTitle"  // Assuming the field name for job title is 'jobTitle'
+  title="Job Title"     // Set the title of the column
+  render={(value) => (
+    <Text>{value}</Text> // Render the job title value
+  )}
+/>
+            <Table.Column<User>
           dataIndex="id"
           title="Actions"
           fixed="right"
-          render={(value) => (
+          render={(value, record) => (
             <Space>
-              <EditButton hideText size="small" recordItemId={value} />
-              <DeleteButton hideText size="small" recordItemId={value} />
-            </Space>
+             {!((roleLabels[record.role] === 'Admin') || (identityData?.id === record.id)) ? (
+              <>
+                <EditButton hideText size="small" recordItemId={value} />
+                <DeleteButton hideText size="small" recordItemId={value} />
+              </>
+            ) : null}
+          </Space>
           )}
         />
-      </Table>
-    </List>
-    {children}
+        </Table>
+      </List>
+      {children}
     </div>
   )
 }

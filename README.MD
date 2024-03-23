@@ -631,6 +631,8 @@ export const USERS_SELECT_QUERY = gql`
         id
         name
         avatarUrl
+        role
+        jobTitle
       }
     }
   }

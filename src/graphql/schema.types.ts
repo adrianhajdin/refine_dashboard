@@ -3400,7 +3400,9 @@ export type RegisterInput = {
 
 /** Role */
 export type Role = "ADMIN" | "SALES_INTERN" | "SALES_MANAGER" | "SALES_PERSON";
-
+export type RoleLabel = {
+  [key in Role]: string;
+};
 /** Sort Directions */
 export type SortDirection = "ASC" | "DESC";
 

@@ -177,7 +177,7 @@ export type CompaniesListQuery = {
 export type UsersListQuery = {
   companies: Pick<Types.UserConnection, "totalCount"> & {
     nodes: Array<
-      Pick<Types.User, "id" | "name" | "avatarUrl"> 
+      Pick<Types.User, "id" | "name" | "avatarUrl" | "role"> 
     >;
   };
 };

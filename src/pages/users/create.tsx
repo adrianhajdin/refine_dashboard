@@ -3,10 +3,15 @@ import { Form, Input, Select, Modal } from 'antd'; // Assuming Select is used fo
 import { useModalForm } from '@refinedev/antd';
 import { useGo } from '@refinedev/core';
 import { CREATE_USERS_MUTATION } from '@/graphql/mutations';
-
+import type { User } from '@/graphql/schema.types'
 const { Option } = Select;
+//default Current User
+interface CreateUserProps {
+  currentUser: User;
+}
 
-const CreateUser = () => {
+
+const CreateUser: React.FC<CreateUserProps> = ({ currentUser }) => {
   const go = useGo();
 
   const goToListPage = () => {
@@ -29,10 +34,11 @@ const CreateUser = () => {
     }
   });
 
-
+  // Define your default timezone here
+  const defaultTimezone = 'UTC';
 
   return (
-    <UsersList>
+    <UsersList currentUser={currentUser}>
       <Modal
         {...modalProps}
         mask={true}
@@ -69,13 +75,21 @@ const CreateUser = () => {
           >
             <Input placeholder="Please enter a job title" />
           </Form.Item>
+
+          <Form.Item
+            label="Timezone"
+            name="timezone"
+            initialValue={defaultTimezone} 
+            hidden 
+          >
+            <Input type="hidden" />
+          </Form.Item>
           <Form.Item
             label="Role"
             name="role"
             rules={[{ required: true, message: 'Please select a role' }]}
           >
             <Select placeholder="Please select a role">
-              <Option value="ADMIN">Admin</Option>
               <Option value="SALES_INTERN">Sales Intern</Option>
               <Option value="SALES_MANAGER">Sales Manager</Option>
               <Option value="SALES_PERSON">Sales Person</Option>
