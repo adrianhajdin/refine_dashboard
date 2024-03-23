@@ -174,6 +174,14 @@ export type CompaniesListQuery = {
   };
 };
 
+export type UsersListQuery = {
+  companies: Pick<Types.UserConnection, "totalCount"> & {
+    nodes: Array<
+      Pick<Types.User, "id" | "name" | "avatarUrl"> 
+    >;
+  };
+};
+
 export type UsersSelectQueryVariables = Types.Exact<{
   filter: Types.UserFilter;
   sorting?: Types.InputMaybe<Array<Types.UserSort> | Types.UserSort>;

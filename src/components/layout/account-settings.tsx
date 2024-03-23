@@ -12,8 +12,8 @@ import { Text } from "../text";
 import CustomAvatar from "../custom-avatar";
 
 import {
-  UpdateUserMutation,
-  UpdateUserMutationVariables,
+  UpdateAdminMutation,
+  UpdateAdminMutationVariables,
 } from "@/graphql/types";
 
 type Props = {
@@ -43,11 +43,11 @@ export const AccountSettings = ({ opened, setOpened, userId }: Props) => {
      * GetFields is used to get the fields of the mutation i.e., in this case, fields are name, email, jobTitle, and phone
      * https://refine.dev/docs/data/packages/nestjs-query/#getfields
      */
-    GetFields<UpdateUserMutation>,
+    GetFields<UpdateAdminMutation>,
     // a type that represents an HTTP error. Used to specify the type of error mutation can throw.
     HttpError,
     // A third type parameter used to specify the type of variables for the UpdateUserMutation. Meaning that the variables for the UpdateUserMutation should be of type UpdateUserMutationVariables
-    GetVariables<UpdateUserMutationVariables>
+    GetVariables<UpdateAdminMutationVariables>
   >({
     /**
      * mutationMode is used to determine how the mutation should be performed. For example, optimistic, pessimistic, undoable etc.
@@ -155,7 +155,7 @@ export const AccountSettings = ({ opened, setOpened, userId }: Props) => {
               <Input placeholder="jobTitle" />
             </Form.Item>
             <Form.Item label="Phone" name="phone">
-              <Input placeholder="Timezone" />
+              <Input placeholder="Phone" />
             </Form.Item>
           </Form>
           <SaveButton

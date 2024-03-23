@@ -17,6 +17,36 @@ export const UPDATE_ADMIN_MUTATION = gql`
   }
 `;
 
+// Mutation to create user
+export const CREATE_USERS_MUTATION = gql`
+  mutation CreateUsers($input: CreateOneUserInput!) {
+    createOneUser(input: $input) {
+      id
+      name
+      avatarUrl
+      email
+      phone
+      jobTitle
+    }
+  }
+`;
+
+
+// Mutation to update user details
+export const UPDATE_USERS_MUTATION = gql`
+  mutation UpdateUsers($input: UpdateOneUserInput!) {
+    updateOneUser(input: $input) {
+      id
+      name
+      avatarUrl
+      email
+      phone
+      jobTitle
+    }
+  }
+`;
+
+
 // Mutation to create company
 export const CREATE_COMPANY_MUTATION = gql`
   mutation CreateCompany($input: CreateOneCompanyInput!) {

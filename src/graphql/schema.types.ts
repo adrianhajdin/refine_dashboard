@@ -1369,6 +1369,7 @@ export type CreateOneCompanyInput = {
   company: CompanyCreateInput;
 };
 
+
 export type CreateOneCompanyNoteInput = {
   /** The record to create */
   companyNote: CompanyNoteCreateInput;
@@ -4740,7 +4741,6 @@ export type UserCreateInput = {
   name: Scalars["String"]["input"];
   phone: Scalars["String"]["input"];
   role: Role;
-  timezone: Scalars["String"]["input"];
 };
 
 export type UserDealsConnection = {

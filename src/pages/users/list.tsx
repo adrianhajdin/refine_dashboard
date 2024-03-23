@@ -1,8 +1,8 @@
 import CustomAvatar from '@/components/custom-avatar';
 import { Text } from '@/components/text';
-import { COMPANIES_LIST_QUERY } from '@/graphql/queries';
-import { Company } from '@/graphql/schema.types';
-import { CompaniesListQuery } from '@/graphql/types';
+import { USERS_SELECT_QUERY  } from '@/graphql/queries';
+import { User } from '@/graphql/schema.types';
+import { UsersListQuery} from '@/graphql/types';
 import { SearchOutlined } from '@ant-design/icons';
 import { CreateButton, DeleteButton, EditButton, FilterDropdown, List, useTable } from '@refinedev/antd'
 import { HttpError, getDefaultFilter, useGo } from '@refinedev/core'
@@ -12,11 +12,11 @@ import { Input, Space, Table } from 'antd';
 export const UsersList = ({ children }: React.PropsWithChildren) => {
   const go = useGo();
   const { tableProps, filters } = useTable<
-    GetFieldsFromList<CompaniesListQuery>,
+    GetFieldsFromList<UsersListQuery>,
     HttpError,
-    GetFieldsFromList<CompaniesListQuery>
+    GetFieldsFromList<UsersListQuery>
   >({
-    resource: 'companies',
+    resource: 'users',
     onSearch: (values) => {
       return [
         {
@@ -47,7 +47,7 @@ export const UsersList = ({ children }: React.PropsWithChildren) => {
       ]
     },
     meta: {
-      gqlQuery: COMPANIES_LIST_QUERY
+      gqlQuery: USERS_SELECT_QUERY 
     }
   })
 
@@ -78,7 +78,7 @@ export const UsersList = ({ children }: React.PropsWithChildren) => {
           ...tableProps.pagination,
         }}
       >
-        <Table.Column<Company>
+        <Table.Column<User>
           dataIndex="name"
           title="User Name"
           defaultFilteredValue={getDefaultFilter('id', filters)}
@@ -97,7 +97,7 @@ export const UsersList = ({ children }: React.PropsWithChildren) => {
             </Space>
           )}
         />
-        <Table.Column<Company>
+        <Table.Column<User>
           dataIndex="id"
           title="Actions"
           fixed="right"
